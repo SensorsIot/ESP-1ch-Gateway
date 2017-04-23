@@ -13,7 +13,7 @@
 // 2016-06-12 - Charles-Henri Hallard (http://hallard.me and http://github.com/hallard)
 //              added support for WeMos Lora Gateway
 //              added AP mode (for OTA)
-//              added Over The Air (OTA) feature 
+//              added Over The Air (OTA) feature
 //              added support for onboard WS2812 RGB Led
 //              refactored include source file
 //              see https://github.com/hallard/WeMos-Lora
@@ -30,25 +30,32 @@
 #define WEMOS_LORA_GW
 
 /*******************************************************************************
- *
- * Configure these values if necessary!
- *
+
+   Configure these values if necessary!
+
  *******************************************************************************/
 
 // WiFi definitions
 // Setup your Wifi SSID and password
 // If your device already connected to your Wifi, then
-// let as is (stars), it will connect using 
+// let as is (stars), it will connect using
 // your previous saved SDK credentials
-#define _SSID     "******"
-#define _PASS     "******"
+
+#ifdef CREDENTIALS   // if sensorsiot credentials.h file is present
+#define _SSID    mySSID
+#define _PASS    myPASSWORD
+#define _EMAIL   myEmail
+#else
+#define _SSID     "..."
+#define _PASS     "..."
+#define _EMAIL    "..."
+#endif
 
 // Access point Password
 #define _AP_PASS  "1Ch@n3l-Gateway"
 
 // MQTT definitions
-//#define _TTNSERVER "croft.thethings.girovito.nl"
-#define _TTNSERVER "eu.staging.thethings.network"
+#define _TTNSERVER "router.eu.thethings.network"
 #define _MQTTSERVER "your.server.com"
 
 // TTN related
@@ -60,27 +67,27 @@
 
 // Gateway Ident definitions
 #define _DESCRIPTION "ESP Gateway"
-#define _EMAIL "<YOUR EMAIL>"
+
 #define _PLATFORM "ESP8266"
-#define _LAT 52.0000000
-#define _LON 6.00000000
-#define _ALT 0
+#define _LAT 47.474683
+#define _LON 7.767343
+#define _ALT 350
 
 // SX1276 - ESP8266 connections
 #ifdef WEMOS_LORA_GW
-  #define DEFAULT_PIN_SS    16          // GPIO16, D0
-  #define DEFAULT_PIN_DIO0  15          // GPIO15, D8
-  #define DEFAULT_PIN_RST   NOT_A_PIN   // Unused
+#define DEFAULT_PIN_SS    16          // GPIO16, D0
+#define DEFAULT_PIN_DIO0  15          // GPIO15, D8
+#define DEFAULT_PIN_RST   NOT_A_PIN   // Unused
 #else
-  #define DEFAULT_PIN_SS    15          // GPIO15, D8
-  #define DEFAULT_PIN_DIO0  5           // GPIO5,  D1
-  #define DEFAULT_PIN_RST   NOT_A_PIN   // Unused
+#define DEFAULT_PIN_SS    15          // GPIO15, D8
+#define DEFAULT_PIN_DIO0  5           // GPIO5,  D1
+#define DEFAULT_PIN_RST   NOT_A_PIN   // Unused
 #endif
 
 #define STATISTICS 1    // Gather statistics on sensor and Wifi status
-#define DEBUG 1         // Initial value of debug var. Can be hanged using the admin webserver
-                        // For operational use, set initial DEBUG vaulue 0
-                
+#define DEBUG 1         // Initial value of debug var. Can be changed using the admin webserver
+// For operational use, set initial DEBUG vaulue 0
+
 // Definitions for the admin webserver
 #define A_SERVER   1      // Define local WebServer only if this define is set
 #define SERVERPORT 8080   // local webserver port
@@ -89,13 +96,13 @@
 #define _BAUDRATE 115200  // Works for debug messages to serial momitor (if attached).
 
 // ntp
-#define NTP_TIMESERVER "nl.pool.ntp.org"  // Country and region specific
+#define NTP_TIMESERVER "ch.pool.ntp.org"  // Country and region specific
 #define NTP_INTERVAL  3600  // How often doe we want time NTP synchronization
 #define NTP_TIMEZONES 2     // How far is our Timezone from UTC (excl daylight saving/summer time)
 
 // ============================================================================
 // Set all definitions for Gateway
-// ============================================================================ 
+// ============================================================================
 
 #define REG_FIFO                    0x00
 #define REG_FIFO_ADDR_PTR           0x0D
@@ -151,10 +158,10 @@
 #define REG_FRF_MID       0x07
 #define REG_FRF_LSB       0x08
 
+
 #define FRF_MSB           0xD9    // 868.1 Mhz
 #define FRF_MID           0x06
 #define FRF_LSB           0x66
-
 #define BUFLEN 2048               //Max length of buffer
 
 #define PROTOCOL_VERSION  1
