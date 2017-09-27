@@ -123,7 +123,7 @@
 #define REG_IRQ_FLAGS_MASK          0x11
 #define REG_MAX_PAYLOAD_LENGTH      0x23
 #define REG_HOP_PERIOD              0x24
-#define REG_SYNC_WORD               0x39
+#define REG_SYNC_WORD               0x27
 #define REG_VERSION                 0x42
 
 #define SX72_MODE_RX_CONTINUOS      0x85
