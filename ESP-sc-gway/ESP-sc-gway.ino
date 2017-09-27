@@ -640,8 +640,6 @@ void SetupLoRa()
   writeRegister(REG_FRF_MID, (uint8_t)(frf >> 8) );
   writeRegister(REG_FRF_LSB, (uint8_t)(frf >> 0) );
 
-  writeRegister(REG_SYNC_WORD, 0x34); // LoRaWAN public sync word
-
   // Set spreading Factor
   if (sx1272) {
     if (sf == SF11 || sf == SF12) {
